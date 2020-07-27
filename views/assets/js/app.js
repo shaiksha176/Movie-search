@@ -22,14 +22,12 @@ var getMovieCast = async (id) => {
 var getMovieDetails = async (event) => {
   cards.innerHTML = "";
   const MovieId = event.target.id;
-  console.log(event.target.id);
   const movie_url = `https://api.themoviedb.org/3/movie/${MovieId}?api_key=7312314f2520b88e7dc4d4fb21dc20f9`;
   try {
     const response = await fetch(movie_url);
     const data = await response.json();
     const result = await data;
     const cast = await getMovieCast(MovieId);
-    const cast_detail = await console.log(cast);
     cast.map((detail) => {
       if (detail.profile_path) {
         cards.innerHTML += `
@@ -54,7 +52,6 @@ var getMovieDetails = async (event) => {
       release_date,
       runtime,
     } = await result;
-    const finalData = await console.log(genres);
 
     movie_detail.innerHTML = `
      <img src="https://image.tmdb.org/t/p/w500/${backdrop_path}" alt="" class="backdrop-image">
@@ -78,8 +75,6 @@ var getMovieDetails = async (event) => {
 };
 
 const movieContainer = (result, isLoading) => {
-  console.log(result);
-
   if (isLoading) {
     return (movies.innerHTML = "Loading....");
   } else {
@@ -95,9 +90,7 @@ const movieContainer = (result, isLoading) => {
 
 Search.addEventListener("click", async (event) => {
   event.preventDefault();
-  console.log(Input.value);
   const newUrl = url + "&query=" + Input.value;
-  console.log(newUrl);
   try {
     isLoading = false;
     const response = await fetch(newUrl);
